@@ -57,14 +57,32 @@ const HomePage = () => {
 
   return (
     <div className="container text-center p-2 w-75">
-      <h4>Get the Latest News Here</h4>
+      <h3>Get the Latest News Here</h3>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 14,
+          marginTop: 20,
+        }}
+      >
         {blogs.map((blog) => (
-          <div key={blog.index}>
-            <h3>{blog.title}</h3>
+          <div
+            key={blog.id}
+            className="bg-light"
+            style={{
+              textAlign: "left",
+              cursor: "pointer",
+              padding: 20,
+              borderRadius: 14,
+            }}
+          >
+            <h5>{blog.title}</h5>
             <p>{blog.body}</p>
-            <p>{blog.date}</p>
+            <p>
+              <b>{blog.date}</b>
+            </p>
           </div>
         ))}
       </div>

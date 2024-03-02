@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useAuth } from '../auth/AuthContext';
 
 const UserProfile = () => {
-  const { isLoggedIn, checkAuth } = useAuth();
+  const { isLoggedIn } = useAuth();
 
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, [checkAuth]);
 
   if (!isLoggedIn) {
     return <p>You must be logged in to view your profile.</p>;
