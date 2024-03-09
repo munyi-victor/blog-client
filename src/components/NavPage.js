@@ -34,8 +34,6 @@ const NavPage = () => {
 
         {isLoggedIn ? (
           <div className="d-flex">
-            <Logout />
-
             <Link
               to="/create-blog"
               className=" text-decoration-none fs-5"
@@ -48,6 +46,8 @@ const NavPage = () => {
             >
               Create Blog
             </Link>
+
+            <Logout />
 
             <Link
               to="/profile"
