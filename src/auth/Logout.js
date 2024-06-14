@@ -11,7 +11,7 @@ const Logout = () => {
   return (
       <Link
         to="/"
-        className="text-white text-decoration-none fs-4"
+        className="btn btn-danger"
         onClick={handleLogout}
       >
         Logout

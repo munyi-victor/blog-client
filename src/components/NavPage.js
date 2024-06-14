@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { useAuth } from '../auth/AuthContext';
-import Logout from '../auth/Logout';
 import prof from "../assets/images/logo192.png";
 
 const NavPage = () => {
@@ -9,7 +8,7 @@ const NavPage = () => {
 
   return (
     <div>
-      <nav className="nav py-1 d-flex">
+      <nav className="nav py-1 d-flex shadow">
         <Link to="/" className="text-white text-decoration-none fs-4">
           Home
         </Link>
@@ -35,21 +34,6 @@ const NavPage = () => {
         {isLoggedIn ? (
           <div className="d-flex">
             <Link
-              to="/create-blog"
-              className=" text-decoration-none fs-5"
-              style={{
-                backgroundColor: "white",
-                color: "#28a775",
-                padding: "2px 6px",
-                borderRadius: 12,
-              }}
-            >
-              Create Blog
-            </Link>
-
-            <Logout />
-
-            <Link
               to="/profile"
               className="text-white text-decoration-none fs-4"
             >
@@ -64,12 +48,12 @@ const NavPage = () => {
           </div>
         ) : (
           <div className="d-flex">
-            <Link to="/login" className="text-white text-decoration-none fs-4">
+            <Link to="/login" className="text-white text-decoration-none fs-5">
               Login
             </Link>
             <Link
               to="/register"
-              className="text-white text-decoration-none fs-4 bg-danger rounded-5 px-3 py-1"
+              className="text-white text-decoration-none fs-5"
             >
               Register
             </Link>

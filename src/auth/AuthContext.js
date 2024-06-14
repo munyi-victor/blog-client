@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext();
 
@@ -56,6 +57,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(url);
 
       if (response.data.success) {
+        Cookies.remove("user_token");
         alert("Logged out successfully");
         setIsLoggedIn(false);
       }
