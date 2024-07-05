@@ -1,49 +1,19 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import { useAuth } from '../auth/AuthContext';
+import { useAuth } from '../auth/AuthContext';
 
 const HomePage = () => {
-  // const { isLoggedIn } = useAuth();
-
-  // const initialLikes = parseInt(localStorage.getItem(`likes_`)) || 0;
-
-  // const [likes, setLikes] = useState(initialLikes);
-  // const [hasLiked, setHasLiked] = useState(false);
-
-  // useEffect(() => {
-  //   localStorage.setItem(`likes_`, likes.toString());
-  // }, [likes]);
-
-  // const like = () => {
-  //   if (!isLoggedIn) {
-  //     alert("You must be logged in to like posts");
-  //   } else {
-  //     if (!hasLiked) {
-  //       setLikes(likes + 1);
-  //       setHasLiked(true);
-  //     }
-  //   }
-  // }
-
-  // const disLike = () => {
-  //   if (!isLoggedIn) {
-  //     alert("You must be logged in to dislike posts");
-  //   } else {
-  //     if (hasLiked) {
-  //       setLikes(likes - 1);
-  //       setHasLiked(false);
-  //     }
-  //   }
-  // }
-
-  // const comment = () => {
-
-  // }
-
   const [blogs, setBlogs] = useState([]);
+
+  const loggedInUserId = localStorage.getItem("loggedInUserId");
+  const { login } = useAuth();
 
   useEffect(() => {
     const getBlogs = async () => {
+      if (loggedInUserId !== null){
+        login();
+      }
+
       try {
         const response = await axios.get("http://localhost:8000/get-blogs");
         setBlogs(response.data);
@@ -53,7 +23,7 @@ const HomePage = () => {
     }
 
     getBlogs();
-  }, []);
+  }, [loggedInUserId, login]);
 
   return (
     <div className="container text-center p-2 w-75">

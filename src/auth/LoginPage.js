@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -21,24 +20,17 @@ const LoginPage = () => {
       const response = await axios.post(url, { username, password });
 
       if (response.data.success) {
-        Cookies.set("user_token", "abc123", { expires: 7, path: "/" });
         alert("Logged in successsfully");
 
+        const loggedInUser = response.data.loggedInUser;
+        localStorage.setItem("loggedInUserId", loggedInUser.id);
+
         login();
+
         navigate("/");        
-
-        const userToken = Cookies.get("user_token");
-
-        if (userToken) {
-          login();
-          navigate("/");
-        }
-        
-        // const userData = await fetchUserData();
-        // setUser(userData);
       }
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error);
     }    
   };
 

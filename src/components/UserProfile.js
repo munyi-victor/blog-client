@@ -1,39 +1,50 @@
-import React from "react";
-// import { useAuth } from "../auth/AuthContext";
+import React, { useEffect, useState } from "react";
 import Logout from "../auth/Logout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../auth/AuthContext";
 
 const UserProfile = () => {
-  // const { isLoggedIn, user } = useAuth();
+  const loggedInUserId = localStorage.getItem("loggedInUserId");
 
-  // useEffect(() => {
-  //   checkAuth();
-  // }, [checkAuth]);
+  const [user, setUser] = useState(null);
 
-  // console.log(user);
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const { login } = useAuth();
 
-  // if (!isLoggedIn) {
-  //   return <p>You must be logged in to view your profile.</p>;
-  // }
+  useEffect(() => {
+    const currentUser = async () => {
+      if (loggedInUserId === null) {
+        logout();
+      } else {
+        login();
+      }
 
-  // if (!user) {
-  //   return <p>Loading user data...</p>;
-  // }
+      try {
+        const response = await axios.get(`http://localhost:8000/getUsers/${loggedInUserId}`);
 
-  // if (!user.profile) {
-  //   return <p>User profile data is not available.</p>;
-  // }
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    currentUser();
+  }, [loggedInUserId, navigate, logout, login]);
+
+  if (!user) {
+    return <p>Loading user data...</p>;
+  }
 
   return (
     <div className="container text-center">
       <h2>Your Profile</h2>
-      {/* <p>Name: {user.profile.name}</p> */}
+      <p>{user.username}</p>
+      <p>{user.email}</p>
 
       <div className="d-flex flex-column gap-2 w-25 align-items-center">
-        <Link
-          to="/create-blog"
-          className="btn btn-success"
-        >
+        <Link to="/create-blog" className="btn btn-success">
           Create Blog
         </Link>
 

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -7,46 +7,51 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
-  const checkAuth = useCallback(async () => {
-    try {
-      const url = "http://localhost:8000/checkAuth";
+  // const checkAuth = useCallback(async () => {  , useEffect, useCallback
+  //   try {
+  //     const url = "http://localhost:8000/checkAuth";
 
-      const response = await axios.get(url);
+  //     const response = await axios.get(url);
 
-      setIsLoggedIn(response.data.isAuthenticated);
+  //     setIsLoggedIn(response.data.isAuthenticated);
 
-      if (response.data.isAuthenticated) {
-        const userData = await fetchUserData();
-        setUser(userData);
-      }
-    } catch (error) {
-      console.error("Error checking authentication status: ", error.message);
-    }
-  }, []);
+  //     if (response.data.isAuthenticated) {
+  //       const userData = await fetchUserData();
+  //       setUser(userData);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error checking authentication status: ", error.message);
+  //   }
+  // }, []);
   
-  const fetchUserData = async () => {
-    try {
-      const url = "http://localhost:8000/userData";
-      const response = await axios.get(url);
+  // const fetchUserData = async () => {
+  //   try {
+  //     const url = "http://localhost:8000/userData";
+  //     const response = await axios.get(url);
 
-      return response.data;
-    } catch (error) {
-      alert("Error fetching user data", error.message);
-      return null;
-    }
-  };
+  //     return response.data;
+  //   } catch (error) {
+  //     alert("Error fetching user data", error.message);
+  //     return null;
+  //   }
+  // };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await checkAuth();
-    }
-    fetchData();
-  }, [checkAuth]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await checkAuth();
+  //   }
+  //   fetchData();
+  // }, [checkAuth]);
+
+  const loggedInUserId = localStorage.getItem("loggedInUserId");
 
 
   const login = () => {
+    if (loggedInUserId !== null) {
+      setIsLoggedIn(true);
+    }
     setIsLoggedIn(true);
   }  
 
@@ -68,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, user, login, logout, checkAuth }}
+      value={{ isLoggedIn, login, logout }}
     >{children}</AuthContext.Provider>
   );
 }
