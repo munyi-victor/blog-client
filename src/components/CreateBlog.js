@@ -55,7 +55,7 @@ const CreateBlog = () => {
             type="submit"
             value={"Publish"}
             className=" text-decoration-none fs-5"
-            style={{
+            style={{  
               backgroundColor: "white",
               color: "#28a775",
               padding: "2px 6px",
