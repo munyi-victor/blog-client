@@ -15,7 +15,8 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const url = "http://localhost:8000/login";
+      // const url = "http://localhost:8000/login";
+      const url = "https://blog-server-seven-nu.vercel.app/login";
 
       const response = await axios.post(url, { username, password });
 

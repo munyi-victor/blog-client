@@ -9,7 +9,9 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:8000/register";
+    // const url = "http://localhost:8000/register";
+    const url = "https://blog-server-seven-nu.vercel.app/register";
+
     axios.post(url, { username, email, password }).then((response) => {
       if (response.data.message) {
         alert(response.data.message);

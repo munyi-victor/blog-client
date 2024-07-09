@@ -15,7 +15,9 @@ const HomePage = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:8000/get-blogs");
+        // const url = "http://localhost:8000/get-blogs";
+        const url = "https://blog-server-seven-nu.vercel.app/get-blogs";
+        const response = await axios.get(url);
         setBlogs(response.data);
       } catch (error) {
         alert(error);

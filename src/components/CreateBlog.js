@@ -9,7 +9,10 @@ const CreateBlog = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/create-blog", { title, body });
+      // const url = "http://localhost:8000/create-blog";
+      const url = "https://blog-server-seven-nu.vercel.app/create-blog";
+
+      const response = await axios.post(url, { title, body });
       if (response.data.success) {
         alert("Your blog was published successfully");
       }

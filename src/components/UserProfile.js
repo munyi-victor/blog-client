@@ -22,7 +22,9 @@ const UserProfile = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:8000/getUsers/${loggedInUserId}`);
+        // const url = `http://localhost:8000/getUsers/${loggedInUserId}`
+        const url = `https://blog-server-seven-nu.vercel.app/getUsers/${loggedInUserId}`;
+        const response = await axios.get(url);
 
         setUser(response.data);
       } catch (error) {
