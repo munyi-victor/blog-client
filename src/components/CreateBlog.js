@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+
+  const navigate = useNavigate();
 
   const createNewPost = async (e) => {
     e.preventDefault();
@@ -15,6 +18,8 @@ const CreateBlog = () => {
       const response = await axios.post(url, { title, body });
       if (response.data.success) {
         alert("Your blog was published successfully");
+        
+        navigate("/");
       } else {
         alert("Something went wrong");
       }
