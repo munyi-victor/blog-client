@@ -15,6 +15,8 @@ const CreateBlog = () => {
       const response = await axios.post(url, { title, body });
       if (response.data.success) {
         alert("Your blog was published successfully");
+      } else {
+        alert(error.response.data.message)
       }
     } catch (error) {
       alert(error.response.data.message);
