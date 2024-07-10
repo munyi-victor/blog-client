@@ -27,6 +27,10 @@ const HomePage = () => {
     getBlogs();
   }, [loggedInUserId, login]);
 
+  if (blogs === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="container text-center p-2 w-75">
       <h3>Get the Latest News Here</h3>
