@@ -2,8 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useAuth } from '../auth/AuthContext';
 
+import {differenceInMilliseconds, formatDistanceToNow } from 'date-fns';
+
 const HomePage = () => {
   const [blogs, setBlogs] = useState([]);
+  const [date, setDate] = useState(null);
 
   const loggedInUserId = localStorage.getItem("loggedInUserId");
   const { login } = useAuth();
@@ -31,6 +34,13 @@ const HomePage = () => {
     return <div>Loading...</div>;
   }
 
+  blogs.forEach(blog => {
+    const pDate = new Date(blog.date);
+    setDate(pDate);
+  })
+
+  const elapsedTime = formatDistanceToNow(date, { addSuffix: true });
+
   return (
     <div className="container text-center p-2 w-75">
       <h3>Get the Latest News Here</h3>
@@ -57,7 +67,7 @@ const HomePage = () => {
             <h5>{blog.title}</h5>
             <p>{blog.body}</p>
             <p>
-              <b>{blog.date}</b>
+              <b>{elapsedTime}</b>
             </p>
           </div>
         ))}

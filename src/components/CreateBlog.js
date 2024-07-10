@@ -16,7 +16,7 @@ const CreateBlog = () => {
       if (response.data.success) {
         alert("Your blog was published successfully");
       } else {
-        alert(error.response.data.message)
+        alert("Something went wrong");
       }
     } catch (error) {
       alert(error.response.data.message);
