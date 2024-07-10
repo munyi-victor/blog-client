@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useAuth } from '../auth/AuthContext';
+import { useAuth } from "../auth/AuthContext";
 
 const HomePage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -10,7 +10,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const getBlogs = async () => {
-      if (loggedInUserId !== null){
+      if (loggedInUserId !== null) {
         login();
       }
 
@@ -22,22 +22,10 @@ const HomePage = () => {
       } catch (error) {
         alert(error);
       }
-    }
+    };
 
     getBlogs();
   }, [loggedInUserId, login]);
-
-  // if (blogs === null) {
-  //   return <div>Loading...</div>;
-  // }
-
-  const [dateFromMySQL, setDateFromMySQL]  = useState("")
-
-  blogs.forEach (blog => {
-    setDateFromMySQL(blog.date)
-  })
-
-  const date = new Date(dateFromMySQL);
 
   // Function to calculate elapsed time
   const calculateElapsedTime = (date) => {
@@ -46,16 +34,16 @@ const HomePage = () => {
     const seconds = Math.floor(diff / 1000);
 
     if (seconds < 60) {
-      return 'Just now';
+      return "Just now";
     } else if (seconds < 3600) {
       const minutes = Math.floor(seconds / 60);
-      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+      return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
     } else if (seconds < 86400) {
       const hours = Math.floor(seconds / 3600);
-      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+      return `${hours} hour${hours > 1 ? "s" : ""} ago`;
     } else {
       const days = Math.floor(seconds / 86400);
-      return `${days} day${days > 1 ? 's' : ''} ago`;
+      return `${days} day${days > 1 ? "s" : ""} ago`;
     }
   };
 
@@ -84,14 +72,12 @@ const HomePage = () => {
           >
             <h5>{blog.title}</h5>
             <p>{blog.body}</p>
-            <p>
-              <b>{calculateElapsedTime(blog.date)}</b>
-            </p>
+            <p>{calculateElapsedTime(blog.date)}</p>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;
