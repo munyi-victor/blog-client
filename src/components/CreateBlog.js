@@ -19,7 +19,7 @@ const CreateBlog = () => {
         alert("Something went wrong");
       }
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error);
     }
 
     

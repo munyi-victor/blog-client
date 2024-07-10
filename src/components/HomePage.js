@@ -30,9 +30,9 @@ const HomePage = () => {
     getBlogs();
   }, [loggedInUserId, login]);
 
-  if (blogs === null) {
-    return <div>Loading...</div>;
-  }
+  // if (blogs === null) {
+  //   return <div>Loading...</div>;
+  // }
 
   blogs.forEach(blog => {
     const pDate = new Date(blog.date);

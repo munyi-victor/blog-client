@@ -7,43 +7,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [user, setUser] = useState(null);
-
-  // const checkAuth = useCallback(async () => {  , useEffect, useCallback
-  //   try {
-  //     const url = "http://localhost:8000/checkAuth";
-
-  //     const response = await axios.get(url);
-
-  //     setIsLoggedIn(response.data.isAuthenticated);
-
-  //     if (response.data.isAuthenticated) {
-  //       const userData = await fetchUserData();
-  //       setUser(userData);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error checking authentication status: ", error.message);
-  //   }
-  // }, []);
-  
-  // const fetchUserData = async () => {
-  //   try {
-  //     const url = "http://localhost:8000/userData";
-  //     const response = await axios.get(url);
-
-  //     return response.data;
-  //   } catch (error) {
-  //     alert("Error fetching user data", error.message);
-  //     return null;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     await checkAuth();
-  //   }
-  //   fetchData();
-  // }, [checkAuth]);
 
   const loggedInUserId = localStorage.getItem("loggedInUserId");
 
@@ -57,12 +20,12 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const url = "http://localhost:8000/logout";
+      // const url = "http://localhost:8000/logout";
+      const url = "https://blog-server-seven-nu.vercel.app/logout";
 
       const response = await axios.post(url);
 
       if (response.data.success) {
-        Cookies.remove("user_token");
         alert("Logged out successfully");
         setIsLoggedIn(false);
       }
